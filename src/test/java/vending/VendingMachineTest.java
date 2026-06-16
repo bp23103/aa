@@ -8,20 +8,20 @@ class VendingMachineTest {
     @Test
     void ちょうどの金額で買える() {
         VendingMachine vm = new VendingMachine();
-        vm.insert(0);                   // ← 仕様書No.1：いくら入れる？
+        vm.insert(150);                 // 仕様書No.1：150円入れる
         Drink d = vm.buy("水");
         assertEquals("水", d.name());
-        assertEquals(0, vm.change());   // ← 仕様書No.1：お釣りは？
+        assertEquals(0, vm.change());   // 仕様書No.1：お釣りは 0円
     }
 
     // 【ケース2】お釣りが正しく出る（正常系）／仕様書No.2
     @Test
     void お釣りが正しく出る() {
         VendingMachine vm = new VendingMachine();
-        vm.insert(0);                   // ← 仕様書No.2：いくら入れる？
+        vm.insert(200);                 // 仕様書No.2：200円入れる
         Drink d = vm.buy("水");
         assertEquals("水", d.name());
-        assertEquals(0, vm.change());   // ← 仕様書No.2：お釣りは？
+        assertEquals(50, vm.change());  // 仕様書No.2：お釣りは 50円
     }
 
     // ----- ケース3・4（異常系）は assertThrows を使うので、コマ2で扱う -----
@@ -31,7 +31,7 @@ class VendingMachineTest {
     void 境界の下では買えない() {
         VendingMachine vm = new VendingMachine();
         vm.insert(140);
-        assertEquals(true, vm.canBuy("水"));   // ← 仕様書No.5：買える？買えない？（true/false を直す）
+        assertEquals(false, vm.canBuy("水"));   // 仕様書No.5：140円では買えない
     }
 
     // 【ケース6】境界の上側なら買える（境界値）／150円
@@ -39,6 +39,6 @@ class VendingMachineTest {
     void 境界の上なら買える() {
         VendingMachine vm = new VendingMachine();
         vm.insert(150);
-        assertEquals(false, vm.canBuy("水"));  // ← 仕様書No.6：買える？買えない？（true/false を直す）
+        assertEquals(true, vm.canBuy("水"));    // 仕様書No.6：150円ちょうどで買える
     }
 }
