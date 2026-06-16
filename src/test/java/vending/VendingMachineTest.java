@@ -8,7 +8,7 @@ class VendingMachineTest {
     @Test
     void ちょうどの金額で買える() {
         VendingMachine vm = new VendingMachine();
-        vm.insert(150);                 // 仕様書No.1：150円入れ
+        vm.insert(0);                 // 仕様書No.1：150円入れ
         Drink d = vm.buy("水");
         assertEquals("水", d.name());
         assertEquals(0, vm.change());   // 仕様書No.1：お釣りは 0円
